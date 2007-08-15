@@ -1,7 +1,7 @@
 %define name	jed
 %define version	0.99.18
 %define sversion 0.99-18
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define slang_version 2.0.7
 %define _requires_exceptions \\(ld-linux.*\\.so\\.2\\|ld.*\\.so\\.1\\)
 
@@ -9,7 +9,7 @@ Summary:	A fast, compact editor based on the slang screen library
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Group:		Editors
 Requires:	jed-common = %{version}
 BuildRequires:	XFree86-devel
@@ -84,18 +84,16 @@ mkdir -p $RPM_BUILD_ROOT%{_bindir}
 mkdir -p $RPM_BUILD_ROOT%{_infodir}
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/jed
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/X11R6/bin
 
 cp -r lib $RPM_BUILD_ROOT%{_datadir}/jed
 cp -r info/jed* $RPM_BUILD_ROOT%{_infodir}
 
 cd src/objs
 install -m 0755 -s jed $RPM_BUILD_ROOT%{_bindir}
-install -m 0755 -s xjed $RPM_BUILD_ROOT%{_prefix}/X11R6/bin
+install -m 0755 -s xjed $RPM_BUILD_ROOT%{_bindir}
 install -m 0755 -s rgrep $RPM_BUILD_ROOT%{_bindir}
 JED_ROOT=$RPM_BUILD_ROOT%{_datadir}/jed $RPM_BUILD_ROOT%{_bindir}/jed -batch -n -l preparse.sl
 chrpath -d $RPM_BUILD_ROOT%{_bindir}/*
-chrpath -d $RPM_BUILD_ROOT%{_prefix}/X11R6/bin/xjed
 
 cd ../../doc/manual
 install -m 644 jed.1 $RPM_BUILD_ROOT%{_mandir}/man1
@@ -112,12 +110,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc COPYING
 %{_bindir}/jed
 
 %files common
 %defattr(-,root,root)
-%doc COPYING COPYRIGHT INSTALL INSTALL.unx README changes.txt
+%doc COPYRIGHT INSTALL INSTALL.unx README changes.txt
 %doc doc/txt/*
 %{_infodir}/*
 %{_mandir}/man1/jed*
@@ -125,13 +122,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files xjed
 %defattr(-,root,root)
-%doc COPYING
-%{_prefix}/X11R6/bin/xjed
+%{_bindir}/xjed
 
 %files -n rgrep
 %defattr(-,root,root)
-%doc COPYING COPYRIGHT INSTALL INSTALL.unx README changes.txt
+%doc COPYRIGHT INSTALL INSTALL.unx README changes.txt
 %{_bindir}/rgrep
 %{_mandir}/man1/rgrep.1*
-
 

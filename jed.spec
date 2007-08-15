@@ -2,7 +2,6 @@
 %define version	0.99.18
 %define sversion 0.99-18
 %define release	%mkrel 2
-%define slang_version 2.0.7
 %define _requires_exceptions \\(ld-linux.*\\.so\\.2\\|ld.*\\.so\\.1\\)
 
 Summary:	A fast, compact editor based on the slang screen library
@@ -14,10 +13,9 @@ Group:		Editors
 Requires:	jed-common = %{version}
 BuildRequires:	XFree86-devel
 BuildRequires:  chrpath
-BuildConflicts: slang-devel
+BuildRequires:	slang-devel
 URL:		http://www.jedsoft.org/jed/
 Source0:	ftp://space.mit.edu/pub/davis/jed/v0.99/jed-%{sversion}.tar.bz2
-Source1:	ftp://space.mit.edu/pub/davis/slang/slang-%{slang_version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 %description
 Jed is a fast, compact editor based on the slang screen library.  Jed
@@ -63,16 +61,12 @@ Install the rgrep package if you need a recursive grep which can
 highlight the matching expression.
 
 %prep
-%setup -q -n jed-%{sversion} -a 1
+%setup -q -n jed-%{sversion}
 
 %build
 sed -i 's|cd ..;pwd|pwd|g' configure
-pushd slang-%{slang_version}
-%configure
-%make
-popd
 export JED_ROOT="%{_datadir}/jed"
-%configure --with-slanglib=`pwd`/slang-%{slang_version}/src/objs --with-slanginc=`pwd`/slang-%{slang_version}/src
+%configure
 %make clean
 %make all
 %make rgrep

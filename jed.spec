@@ -11,7 +11,7 @@ Release:	%{release}
 License:	GPLv2+
 Group:		Editors
 Requires:	jed-common = %{version}
-BuildRequires:	XFree86-devel
+BuildRequires:	X11-devel
 BuildRequires:  chrpath
 BuildRequires:	slang-devel
 URL:		http://www.jedsoft.org/jed/

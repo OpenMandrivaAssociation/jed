@@ -1,7 +1,7 @@
 %define name	jed
-%define version	0.99.18
-%define sversion 0.99-18
-%define release	%mkrel 5
+%define version	0.99.19
+%define sversion 0.99-19
+%define release	%mkrel 1
 %define _requires_exceptions \\(ld-linux.*\\.so\\.2\\|ld.*\\.so\\.1\\)
 
 Summary:	A fast, compact editor based on the slang screen library

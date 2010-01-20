@@ -16,7 +16,9 @@ BuildRequires:  chrpath
 BuildRequires:	slang-devel
 URL:		http://www.jedsoft.org/jed/
 Source0:	ftp://space.mit.edu/pub/davis/jed/v0.99/jed-%{sversion}.tar.bz2
+Patch0:		jed-0.99.19-fed-multilib-newauto.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+
 %description
 Jed is a fast, compact editor based on the slang screen library.  Jed
 features include emulation of the Emacs, EDT, WordStar and Brief editors;
@@ -62,6 +64,14 @@ highlight the matching expression.
 
 %prep
 %setup -q -n jed-%{sversion}
+%ifarch x86_64
+%patch0 -p1
+%endif
+
+cd autoconf
+autoconf
+mv configure ..
+cd .. 
 
 %build
 sed -i 's|cd ..;pwd|pwd|g' configure

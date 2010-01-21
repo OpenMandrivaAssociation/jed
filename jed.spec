@@ -1,7 +1,7 @@
 %define name	jed
 %define version	0.99.19
 %define sversion 0.99-19
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define _requires_exceptions \\(ld-linux.*\\.so\\.2\\|ld.*\\.so\\.1\\)
 
 Summary:	A fast, compact editor based on the slang screen library
@@ -12,7 +12,6 @@ License:	GPLv2+
 Group:		Editors
 Requires:	jed-common = %{version}
 BuildRequires:	X11-devel
-#BuildRequires:  chrpath
 BuildRequires:	slang-devel
 URL:		http://www.jedsoft.org/jed/
 Source0:	ftp://space.mit.edu/pub/davis/jed/v0.99/jed-%{sversion}.tar.bz2
@@ -83,28 +82,30 @@ export JED_ROOT="%{_datadir}/jed"
 %make xjed
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_infodir}
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/jed
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+rm -rf %{buildroot}
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_infodir}
+mkdir -p %{buildroot}%{_datadir}/jed
+mkdir -p %{buildroot}%{_mandir}/man1
 
-cp -r lib $RPM_BUILD_ROOT%{_datadir}/jed
-cp -r info/jed* $RPM_BUILD_ROOT%{_infodir}
+cp -r lib %{buildroot}%{_datadir}/jed
+cp -r info/jed* %{buildroot}%{_infodir}
 
 cd src/objs
-install -m 0755 -s jed $RPM_BUILD_ROOT%{_bindir}
-install -m 0755 -s xjed $RPM_BUILD_ROOT%{_bindir}
-install -m 0755 -s rgrep $RPM_BUILD_ROOT%{_bindir}
-JED_ROOT=$RPM_BUILD_ROOT%{_datadir}/jed $RPM_BUILD_ROOT%{_bindir}/jed -batch -n -l preparse.sl
-#chrpath -d $RPM_BUILD_ROOT%{_bindir}/*
+install -m 0755 -s jed %{buildroot}%{_bindir}
+install -m 0755 -s xjed %{buildroot}%{_bindir}
+install -m 0755 -s rgrep %{buildroot}%{_bindir}
+
+JED_ROOT=%{buildroot}%{_datadir}/jed %{buildroot}%{_bindir}/jed -batch -n -l preparse.sl
+# wait till jed finishes
+while ps -C jed > /dev/null; do sleep 1; done 
 
 cd ../../doc/manual
-install -m 644 jed.1 $RPM_BUILD_ROOT%{_mandir}/man1
-install -m 644 rgrep.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install -m 644 jed.1 %{buildroot}%{_mandir}/man1
+install -m 644 rgrep.1 %{buildroot}%{_mandir}/man1
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post common
 %_install_info %{name}.info

@@ -12,7 +12,7 @@ License:	GPLv2+
 Group:		Editors
 Requires:	jed-common = %{version}
 BuildRequires:	X11-devel
-BuildRequires:  chrpath
+#BuildRequires:  chrpath
 BuildRequires:	slang-devel
 URL:		http://www.jedsoft.org/jed/
 Source0:	ftp://space.mit.edu/pub/davis/jed/v0.99/jed-%{sversion}.tar.bz2
@@ -97,7 +97,7 @@ install -m 0755 -s jed $RPM_BUILD_ROOT%{_bindir}
 install -m 0755 -s xjed $RPM_BUILD_ROOT%{_bindir}
 install -m 0755 -s rgrep $RPM_BUILD_ROOT%{_bindir}
 JED_ROOT=$RPM_BUILD_ROOT%{_datadir}/jed $RPM_BUILD_ROOT%{_bindir}/jed -batch -n -l preparse.sl
-chrpath -d $RPM_BUILD_ROOT%{_bindir}/*
+#chrpath -d $RPM_BUILD_ROOT%{_bindir}/*
 
 cd ../../doc/manual
 install -m 644 jed.1 $RPM_BUILD_ROOT%{_mandir}/man1

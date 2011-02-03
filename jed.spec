@@ -1,8 +1,7 @@
 %define name	jed
 %define version	0.99.19
 %define sversion 0.99-19
-%define release	%mkrel 3
-%define _requires_exceptions \\(ld-linux.*\\.so\\.2\\|ld.*\\.so\\.1\\)
+%define release	%mkrel 4
 
 Summary:	A fast, compact editor based on the slang screen library
 Name:		%{name}
@@ -11,7 +10,10 @@ Release:	%{release}
 License:	GPLv2+
 Group:		Editors
 Requires:	jed-common = %{version}
-BuildRequires:	X11-devel
+BuildRequires:	libx11-devel
+BuildRequires:	libxft-devel
+BuildRequires:	libxt-devel
+BuildRequires:	gpm-devel
 BuildRequires:	slang-devel
 URL:		http://www.jedsoft.org/jed/
 Source0:	ftp://space.mit.edu/pub/davis/jed/v0.99/jed-%{sversion}.tar.bz2
@@ -75,7 +77,7 @@ cd ..
 %build
 sed -i 's|cd ..;pwd|pwd|g' configure
 export JED_ROOT="%{_datadir}/jed"
-%configure
+%configure2_5x
 %make clean
 %make all
 %make rgrep

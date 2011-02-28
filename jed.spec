@@ -1,7 +1,7 @@
 %define name	jed
 %define version	0.99.19
 %define sversion 0.99-19
-%define release	%mkrel 4
+%define release	%mkrel 5
 
 Summary:	A fast, compact editor based on the slang screen library
 Name:		%{name}
@@ -10,6 +10,7 @@ Release:	%{release}
 License:	GPLv2+
 Group:		Editors
 Requires:	jed-common = %{version}
+Requires:	slang-slsh
 BuildRequires:	libx11-devel
 BuildRequires:	libxft-devel
 BuildRequires:	libxt-devel

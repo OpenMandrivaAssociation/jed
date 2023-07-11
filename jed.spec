@@ -2,8 +2,8 @@
 
 Summary:	A fast, compact editor based on the slang screen library
 Name:		jed
-Version:	0.99.19
-Release:	7
+Version:	0.99_19
+Release:	1
 License:	GPLv2+
 Group:		Editors
 Url:		http://www.jedsoft.org/jed/

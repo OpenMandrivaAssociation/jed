@@ -6,7 +6,7 @@ Version:	0.99_19
 Release:	1
 License:	GPLv2+
 Group:		Editors
-Url:		http://www.jedsoft.org/jed/
+Url:		https://www.jedsoft.org/jed/
 Source0:	ftp://space.mit.edu/pub/davis/jed/v0.99/jed-%{sversion}.tar.bz2
 Patch0:		jed-0.99.19-fed-multilib-newauto.patch
 BuildRequires:	gpm-devel
